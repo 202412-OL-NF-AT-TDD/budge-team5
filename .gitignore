@@ -1,0 +1,7 @@
+*.user
+out
+.idea
+**/obj
+**/bin
+.DS_Store
+global.json
