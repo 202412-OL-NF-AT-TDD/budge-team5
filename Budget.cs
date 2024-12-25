@@ -27,4 +27,9 @@ public class Budget
         var firstDay = FirstDay();
         return new DateTime(firstDay.Year, firstDay.Month, Days());
     }
+
+    public Period CreatePeriod()
+    {
+        return new Period(FirstDay(), LastDay());
+    }
 }
