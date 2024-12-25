@@ -44,7 +44,7 @@ public class BudgetService
             if (targetBudget.YearMonth == start.ToString("yyyyMM"))
             {
                 var daysInStart = DateTime.DaysInMonth(start.Year, start.Month);
-                totalBudget += (decimal)(daysInStart - start.Day + 1) * targetBudget.Amount / daysInStart;
+                totalBudget += (decimal)(daysInStart - start.Day + 1) * (targetBudget.Amount / daysInStart);
             }
             else if (targetBudget.YearMonth == end.ToString("yyyyMM"))
             {
