@@ -45,7 +45,8 @@ public class BudgetService
             var overlappingDays =
                 period.OverlappingDays(targetBudget.CreatePeriod());
 
-            totalBudget += (decimal)overlappingDays * targetBudget.DailyAmount();
+            var overlappingAmount = (decimal)overlappingDays * targetBudget.DailyAmount();
+            totalBudget += overlappingAmount;
         }
 
         return totalBudget;
