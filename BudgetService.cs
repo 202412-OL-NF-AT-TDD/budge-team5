@@ -41,29 +41,25 @@ public class BudgetService
 
         foreach (var targetBudget in targetBudgets)
         {
-            int overlappingDays;
             DateTime overlappingEnd;
             DateTime overlappingStart;
             if (targetBudget.YearMonth == start.ToString("yyyyMM"))
             {
                 overlappingEnd = targetBudget.LastDay();
                 overlappingStart = start;
-                // overlappingDays = (overlappingEnd - overlappingStart).Days + 1;
             }
             else if (targetBudget.YearMonth == end.ToString("yyyyMM"))
             {
                 overlappingEnd = end;
                 overlappingStart = targetBudget.FirstDay();
-                // overlappingDays = (overlappingEnd - overlappingStart).Days + 1;
             }
             else
             {
                 overlappingEnd = targetBudget.LastDay();
                 overlappingStart = targetBudget.FirstDay();
-                // overlappingDays = (overlappingEnd - overlappingStart).Days + 1;
             }
 
-            overlappingDays = (overlappingEnd - overlappingStart).Days + 1;
+            var overlappingDays = (overlappingEnd - overlappingStart).Days + 1;
 
             totalBudget += (decimal)overlappingDays * targetBudget.DailyAmount();
         }
