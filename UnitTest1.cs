@@ -258,7 +258,6 @@ public class BudgetService(IBudgetRepo budgetRepo)
                     var daysInStart = DateTime.DaysInMonth(start.Year, start.Month);
                     totalBudget += (decimal)(daysInStart - start.Day + 1) * targetBudget.Amount / daysInStart;
                 }
-
                 else if (targetBudget.YearMonth == end.ToString("yyyyMM"))
                 {
                     var daysInEnd = DateTime.DaysInMonth(end.Year, end.Month);
