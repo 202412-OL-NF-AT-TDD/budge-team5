@@ -2,43 +2,41 @@
 
 public class Budget
 {
-    public int Amount { get; set; }
-    public string YearMonth { get; set; }
-
-    public int DailyAmount()
-    {
-        var dailyAmount = Amount / Days();
-        return dailyAmount;
-    }
-
-    public int Days()
-    {
-        var firstDay = FirstDay();
-        return DateTime.DaysInMonth(firstDay.Year, firstDay.Month);
-    }
-
-    public DateTime FirstDay()
-    {
-        return DateTime.ParseExact(YearMonth, "yyyyMM", null);
-    }
-
-    public DateTime LastDay()
-    {
-        var firstDay = FirstDay();
-        return new DateTime(firstDay.Year, firstDay.Month, Days());
-    }
-
-    public Period CreatePeriod()
-    {
-        return new Period(FirstDay(), LastDay());
-    }
+    public int Amount { get; init; }
+    public string YearMonth { get; init; }
 
     public decimal OverlappingAmount(Period period)
     {
         var overlappingDays =
             period.OverlappingDays(CreatePeriod());
 
-        var overlappingAmount = (decimal)overlappingDays * DailyAmount();
-        return overlappingAmount;
+        return (decimal)overlappingDays * DailyAmount();
+    }
+
+    private Period CreatePeriod()
+    {
+        return new Period(FirstDay(), LastDay());
+    }
+
+    private int DailyAmount()
+    {
+        return Amount / Days();
+    }
+
+    private int Days()
+    {
+        var firstDay = FirstDay();
+        return DateTime.DaysInMonth(firstDay.Year, firstDay.Month);
+    }
+
+    private DateTime FirstDay()
+    {
+        return DateTime.ParseExact(YearMonth, "yyyyMM", null);
+    }
+
+    private DateTime LastDay()
+    {
+        var firstDay = FirstDay();
+        return new DateTime(firstDay.Year, firstDay.Month, Days());
     }
 }
