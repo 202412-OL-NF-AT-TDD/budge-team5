@@ -42,19 +42,10 @@ public class BudgetService
         var period = new Period(start, end);
         foreach (var targetBudget in targetBudgets)
         {
-            var overlappingAmount = OverlappingAmount(period, targetBudget);
+            var overlappingAmount = targetBudget.OverlappingAmount(period);
             totalBudget += overlappingAmount;
         }
 
         return totalBudget;
-    }
-
-    private static decimal OverlappingAmount(Period period, Budget targetBudget)
-    {
-        var overlappingDays =
-            period.OverlappingDays(targetBudget.CreatePeriod());
-
-        var overlappingAmount = (decimal)overlappingDays * targetBudget.DailyAmount();
-        return overlappingAmount;
     }
 }

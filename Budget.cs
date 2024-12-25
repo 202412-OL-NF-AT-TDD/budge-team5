@@ -32,4 +32,13 @@ public class Budget
     {
         return new Period(FirstDay(), LastDay());
     }
+
+    public decimal OverlappingAmount(Period period)
+    {
+        var overlappingDays =
+            period.OverlappingDays(CreatePeriod());
+
+        var overlappingAmount = (decimal)overlappingDays * DailyAmount();
+        return overlappingAmount;
+    }
 }
