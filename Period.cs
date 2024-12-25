@@ -8,31 +8,30 @@ public class Period
         End = end;
     }
 
-    public DateTime End { get; private set; }
+    private DateTime End { get; set; }
 
-    public DateTime Start { get; private set; }
+    private DateTime Start { get; set; }
 
-    public int OverlappingDays(Budget targetBudget)
+    public int OverlappingDays(Budget budget)
     {
         DateTime overlappingEnd;
         DateTime overlappingStart;
-        if (targetBudget.YearMonth == Start.ToString("yyyyMM"))
+        if (budget.YearMonth == Start.ToString("yyyyMM"))
         {
-            overlappingEnd = targetBudget.LastDay();
+            overlappingEnd = budget.LastDay();
             overlappingStart = Start;
         }
-        else if (targetBudget.YearMonth == End.ToString("yyyyMM"))
+        else if (budget.YearMonth == End.ToString("yyyyMM"))
         {
             overlappingEnd = End;
-            overlappingStart = targetBudget.FirstDay();
+            overlappingStart = budget.FirstDay();
         }
         else
         {
-            overlappingEnd = targetBudget.LastDay();
-            overlappingStart = targetBudget.FirstDay();
+            overlappingEnd = budget.LastDay();
+            overlappingStart = budget.FirstDay();
         }
 
-        var overlappingDays = (overlappingEnd - overlappingStart).Days + 1;
-        return overlappingDays;
+        return (overlappingEnd - overlappingStart).Days + 1;
     }
 }
