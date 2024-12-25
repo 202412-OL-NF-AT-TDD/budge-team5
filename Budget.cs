@@ -13,19 +13,18 @@ public class Budget
 
     public int Days()
     {
-        var firstDay = DateTime.ParseExact(YearMonth, "yyyyMM", null);
+        var firstDay = FirstDay();
         return DateTime.DaysInMonth(firstDay.Year, firstDay.Month);
     }
 
     public DateTime FirstDay()
     {
-        var firstDay = DateTime.ParseExact(YearMonth, "yyyyMM", null);
-        return firstDay;
+        return DateTime.ParseExact(YearMonth, "yyyyMM", null);
     }
 
     public DateTime LastDay()
     {
-        var firstDay = DateTime.ParseExact(YearMonth, "yyyyMM", null);
+        var firstDay = FirstDay();
         return new DateTime(firstDay.Year, firstDay.Month, Days());
     }
 }
