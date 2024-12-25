@@ -1,5 +1,18 @@
 ﻿namespace Budget_Team5;
 
+public class Period
+{
+    public Period(DateTime start, DateTime end)
+    {
+        Start = start;
+        End = end;
+    }
+
+    public DateTime End { get; private set; }
+
+    public DateTime Start { get; private set; }
+}
+
 public class BudgetService
 {
     private readonly IBudgetRepo _budgetRepo;
@@ -41,7 +54,7 @@ public class BudgetService
 
         foreach (var targetBudget in targetBudgets)
         {
-            var overlappingDays = OverlappingDays(start, end, targetBudget);
+            var overlappingDays = OverlappingDays(new Period(start, end), targetBudget);
 
             totalBudget += (decimal)overlappingDays * targetBudget.DailyAmount();
         }
@@ -49,18 +62,18 @@ public class BudgetService
         return totalBudget;
     }
 
-    private static int OverlappingDays(DateTime start, DateTime end, Budget targetBudget)
+    private static int OverlappingDays(Period period, Budget targetBudget)
     {
         DateTime overlappingEnd;
         DateTime overlappingStart;
-        if (targetBudget.YearMonth == start.ToString("yyyyMM"))
+        if (targetBudget.YearMonth == period.Start.ToString("yyyyMM"))
         {
             overlappingEnd = targetBudget.LastDay();
-            overlappingStart = start;
+            overlappingStart = period.Start;
         }
-        else if (targetBudget.YearMonth == end.ToString("yyyyMM"))
+        else if (targetBudget.YearMonth == period.End.ToString("yyyyMM"))
         {
-            overlappingEnd = end;
+            overlappingEnd = period.End;
             overlappingStart = targetBudget.FirstDay();
         }
         else
