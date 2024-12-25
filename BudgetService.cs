@@ -39,10 +39,11 @@ public class BudgetService
         var targetBudgets = budgets.Where(bu => monthKeys.Contains(bu.YearMonth)).ToList();
         var totalBudget = 0m;
 
+        var period = new Period(start, end);
         foreach (var targetBudget in targetBudgets)
         {
             var overlappingDays =
-                new Period(start, end).OverlappingDays(new Period(targetBudget.FirstDay(), targetBudget.LastDay()));
+                period.OverlappingDays(new Period(targetBudget.FirstDay(), targetBudget.LastDay()));
 
             totalBudget += (decimal)overlappingDays * targetBudget.DailyAmount();
         }
