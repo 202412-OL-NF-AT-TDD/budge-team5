@@ -198,6 +198,11 @@ public class Tests
                 YearMonth = "202501",
                 Amount = 9300
             },
+            new Budget
+            {
+                YearMonth = "202502",
+                Amount = 93000
+            },
         ]);
 
         var result = _budgetService.Query(new DateTime(2024, 10, 31), new DateTime(2025, 1, 1));
@@ -237,7 +242,6 @@ public class BudgetService(IBudgetRepo budgetRepo)
         }
 
         var monthKeys = new List<string>();
-
         var startPointer = new DateTime(start.Year, start.Month, 1);
         var endPointer = new DateTime(end.Year, end.Month, DateTime.DaysInMonth(end.Year, end.Month));
 
