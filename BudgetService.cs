@@ -37,15 +37,9 @@ public class BudgetService
         }
 
         var targetBudgets = budgets.Where(bu => monthKeys.Contains(bu.YearMonth)).ToList();
-        var totalBudget = 0m;
 
         var period = new Period(start, end);
-        foreach (var targetBudget in targetBudgets)
-        {
-            var overlappingAmount = targetBudget.OverlappingAmount(period);
-            totalBudget += overlappingAmount;
-        }
 
-        return totalBudget;
+        return targetBudgets.Sum(targetBudget => targetBudget.OverlappingAmount(period));
     }
 }
