@@ -16,4 +16,10 @@ public class Budget
         var dailyAmount = Amount / Days();
         return dailyAmount;
     }
+
+    public DateTime LastDay()
+    {
+        var firstDay = DateTime.ParseExact(YearMonth, "yyyyMM",null);
+        return new DateTime(firstDay.Year, firstDay.Month, Days());
+    }
 }
