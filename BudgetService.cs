@@ -41,35 +41,11 @@ public class BudgetService
 
         foreach (var targetBudget in targetBudgets)
         {
-            var overlappingDays = OverlappingDays(new Period(start, end), targetBudget);
+            var overlappingDays = new Period(start, end).OverlappingDays(targetBudget);
 
             totalBudget += (decimal)overlappingDays * targetBudget.DailyAmount();
         }
 
         return totalBudget;
-    }
-
-    private static int OverlappingDays(Period period, Budget targetBudget)
-    {
-        DateTime overlappingEnd;
-        DateTime overlappingStart;
-        if (targetBudget.YearMonth == period.Start.ToString("yyyyMM"))
-        {
-            overlappingEnd = targetBudget.LastDay();
-            overlappingStart = period.Start;
-        }
-        else if (targetBudget.YearMonth == period.End.ToString("yyyyMM"))
-        {
-            overlappingEnd = period.End;
-            overlappingStart = targetBudget.FirstDay();
-        }
-        else
-        {
-            overlappingEnd = targetBudget.LastDay();
-            overlappingStart = targetBudget.FirstDay();
-        }
-
-        var overlappingDays = (overlappingEnd - overlappingStart).Days + 1;
-        return overlappingDays;
     }
 }
