@@ -10,4 +10,10 @@ public class Budget
         var firstDay = DateTime.ParseExact(YearMonth, "yyyyMM",null);
         return DateTime.DaysInMonth(firstDay.Year, firstDay.Month);
     }
+
+    public int DailyAmount()
+    {
+        var dailyAmount = Amount / Days();
+        return dailyAmount;
+    }
 }
